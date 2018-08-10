@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar dark class="purple darken-1">
+    <v-toolbar dark class="primary">
 
       <v-toolbar-side-icon
         class="hidden-sm-and-up"
