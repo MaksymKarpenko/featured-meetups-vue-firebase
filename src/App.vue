@@ -1,41 +1,55 @@
 <template>
   <v-app>
-    <v-toolbar dark class="purple darken-1">
+
+    <v-toolbar dark class="primary">
 
       <v-toolbar-side-icon
         class="hidden-sm-and-up"
-        @click.native="sideNav = !sideNav"
+        @click.native.stop="sideNav = !sideNav"
       ></v-toolbar-side-icon>
 
       <v-toolbar-title>
-        DevMeetup
+        <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
       </v-toolbar-title>
 
       <v-spacer />
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat>
-          <v-icon left dark>supervisor_account</v-icon>
-          View Meetups
+        <v-btn
+        flat
+        v-for="item in menuItems"
+        :key="`btn + ${item.title}`"
+        router
+        :to="item.link"
+        >
+          <v-icon left dark>{{ item.icon }}</v-icon>
+          {{ item.title }}
         </v-btn>
       </v-toolbar-items>
 
     </v-toolbar>
 
-    <main></main>
-    <v-navigation-drawer
-      v-model="sideNav"
-    >
-      <v-list>
-        <v-list-tile>
+    <main>
+      <router-view></router-view>
+    </main>
+
+    <v-navigation-drawer :absolute="true" v-model="sideNav">
+      <v-list dense class="pt-0">
+        <v-list-tile
+          v-for="item in menuItems"
+          :key="item.title"
+          router
+          :to="item.link"
+        >
           <v-list-tile-action>
             <v-icon>
-              supervisor_account
+              {{ item.icon }}
             </v-icon>
           </v-list-tile-action>
-          <v-list-tile-content>View Meetups</v-list-tile-content>
+          <v-list-tile-content>{{ item.title }}</v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+
   </v-app>
 </template>
 
@@ -43,7 +57,14 @@
 export default {
   data () {
     return {
-      sideNav: false
+      sideNav: false,
+      menuItems: [
+        { icon: 'supervisor_account', title: 'View Meetups', link: '/meetups' },
+        { icon: 'room', title: 'Oraganize Meetup', link: 'meetup/new' },
+        { icon: 'person', title: 'Profile', link: '/profile' },
+        { icon: 'face', title: 'Sign up', link: '/signup' },
+        { icon: 'lock_open', title: 'Sign in', link: '/signin' }
+      ]
     }
   }
 }
