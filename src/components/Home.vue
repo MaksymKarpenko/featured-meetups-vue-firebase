@@ -1,5 +1,61 @@
 <template>
-  <div>
-    <p>The Home Page</p>
-  </div>
+  <v-container>
+    <v-layout row wrap class="mb-2">
+      <v-flex xs12 sm6 class="text-xs-center text-sm-right">
+        <v-btn large router to="/meetups" class="info">Explore Meetups</v-btn>
+      </v-flex>
+
+      <v-flex xs12 sm6 class="text-xs-center text-sm-left">
+        <v-btn large router to="/meetups/new" class="info">Organize Meetups</v-btn>
+      </v-flex>
+    </v-layout>
+
+    <v-layout row wrap class="mt-2">
+      <v-flex xs-12>
+        <v-carousel>
+          <v-carousel-item
+            v-for="meetup in meetups"
+            :key="meetup.id"
+            :src="meetup.imageUrl"
+          >
+          <div class="title">
+            {{ meetup.title }}
+          </div>
+          </v-carousel-item>
+        </v-carousel>
+      </v-flex>
+    </v-layout>
+
+    <v-layout row wrap class="mt-2">
+      <v-flex xs12 class="text-xs-center">
+        <p> Join to our awesome meetups!</p>
+      </v-flex>
+    </v-layout>
+
+  </v-container>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      meetups: [
+        { imageUrl: 'https://ob9a8415roh4djoj110c31a1-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/barcelona-aerial-view.jpg', id: 'sdfsdf123', title: 'Meetup in Barcelona' },
+        { imageUrl: 'https://putevye-istorii.ru/wp-content/uploads/2016/11/IMG_1987.jpg', id: 'sdfsdf456', title: 'Meetup in Amsterdam' }
+      ]
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .title {
+    position: absolute;
+    left: 35%;
+    bottom: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 2em;
+    padding: 20px;
+  }
+</style>
