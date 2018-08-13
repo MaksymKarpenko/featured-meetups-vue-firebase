@@ -1,19 +1,26 @@
 <template>
   <v-app>
+
     <v-toolbar dark class="primary">
 
       <v-toolbar-side-icon
         class="hidden-sm-and-up"
-        @click.native="sideNav = !sideNav"
+        @click.native.stop="sideNav = !sideNav"
       ></v-toolbar-side-icon>
 
       <v-toolbar-title>
-        DevMeetup
+        <router-link to="/" tag="span" style="cursor: pointer">DevMeetup</router-link>
       </v-toolbar-title>
 
       <v-spacer />
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat v-for="item in menuItems" :key="`btn + ${item.title}`">
+        <v-btn
+        flat
+        v-for="item in menuItems"
+        :key="`btn + ${item.title}`"
+        router
+        :to="item.link"
+        >
           <v-icon left dark>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
@@ -21,14 +28,17 @@
 
     </v-toolbar>
 
-    <main></main>
-    <v-navigation-drawer
-      v-model="sideNav"
-    >
-      <v-list>
+    <main>
+      <router-view></router-view>
+    </main>
+
+    <v-navigation-drawer :absolute="true" v-model="sideNav">
+      <v-list dense class="pt-0">
         <v-list-tile
           v-for="item in menuItems"
           :key="item.title"
+          router
+          :to="item.link"
         >
           <v-list-tile-action>
             <v-icon>
@@ -39,6 +49,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+
   </v-app>
 </template>
 
@@ -48,11 +59,11 @@ export default {
     return {
       sideNav: false,
       menuItems: [
-        { icon: 'supervisor_account', title: 'View Meetups' },
-        { icon: 'room', title: 'Oraganize Meetup' },
-        { icon: 'person', title: 'Profile' },
-        { icon: 'face', title: 'Sign up' },
-        { icon: 'lock_open', title: 'Sign in' }
+        { icon: 'supervisor_account', title: 'View Meetups', link: '/meetups' },
+        { icon: 'room', title: 'Oraganize Meetup', link: 'meetup/new' },
+        { icon: 'person', title: 'Profile', link: '/profile' },
+        { icon: 'face', title: 'Sign up', link: '/signup' },
+        { icon: 'lock_open', title: 'Sign in', link: '/signin' }
       ]
     }
   }
