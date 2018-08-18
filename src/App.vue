@@ -5,7 +5,7 @@
 
       <v-toolbar-side-icon
         class="hidden-sm-and-up"
-        @click.native.stop="sideNav = !sideNav"
+        @click.stop="sideNav = !sideNav"
       ></v-toolbar-side-icon>
 
       <v-toolbar-title>
@@ -18,7 +18,6 @@
         flat
         v-for="item in menuItems"
         :key="`btn + ${item.title}`"
-        router
         :to="item.link"
         >
           <v-icon left dark>{{ item.icon }}</v-icon>
@@ -37,7 +36,6 @@
         <v-list-tile
           v-for="item in menuItems"
           :key="item.title"
-          router
           :to="item.link"
         >
           <v-list-tile-action>
