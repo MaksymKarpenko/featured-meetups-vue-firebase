@@ -12,11 +12,12 @@
 
     <v-layout row wrap class="mt-2">
       <v-flex xs-12>
-        <v-carousel>
+        <v-carousel style="cursor: pointer">
           <v-carousel-item
             v-for="meetup in meetups"
             :key="meetup.id"
             :src="meetup.imageUrl"
+            @click="onLoadMeetup(meetup.id)"
           >
           <div class="title">
             {{ meetup.title }}
@@ -43,6 +44,11 @@ export default {
         { imageUrl: 'https://ob9a8415roh4djoj110c31a1-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/barcelona-aerial-view.jpg', id: 'sdfsdf123', title: 'Meetup in Barcelona' },
         { imageUrl: 'https://putevye-istorii.ru/wp-content/uploads/2016/11/IMG_1987.jpg', id: 'sdfsdf456', title: 'Meetup in Amsterdam' }
       ]
+    }
+  },
+  methods: {
+    onLoadMeetup (id) {
+      this.$router.push('/meetups/' + id)
     }
   }
 }
