@@ -4,14 +4,14 @@
       <v-flex xs12>
         <v-card>
           <v-card-title>
-            <h6 class="primary--text">My Meetup</h6>
+            <h6 class="primary--text">{{ meetup.title }}</h6>
           </v-card-title>
           <v-card-media
-            src="https://ob9a8415roh4djoj110c31a1-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/barcelona-aerial-view.jpg"
+            :src="meetup.imageUrl"
             height="400px"
           ></v-card-media>
           <v-card-text>
-            <div class="info--text"> 17th July 2017 - Where it takes place </div>
+            <div class="info--text">{{ meetup.date }} - Where it takes place </div>
             <div>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa numquam et nesciunt incidunt inventore perferendis atque, corrupti, provident autem cum velit. Expedita, similique error perspiciatis sed deserunt commodi dolorem velit.
             </div>
@@ -25,3 +25,16 @@
     </v-layout>
   </v-container>
 </template>
+
+<script>
+export default {
+  props: [
+    'id'
+  ],
+  computed: {
+    meetup () {
+      return this.$store.getters.loadedMeetup(this.id)
+    }
+  }
+}
+</script>
