@@ -45,7 +45,9 @@ export default {
   },
   methods: {
     onLoadMeetup (id) {
-      this.$router.push('/meetups/' + id)
+      return this.$router.push(
+        { path: '/meetups/' + id }
+      )
     }
   }
 }
