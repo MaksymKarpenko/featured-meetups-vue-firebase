@@ -17,7 +17,7 @@
             v-for="meetup in meetups"
             :key="meetup.id"
             :src="meetup.imageUrl"
-            @click="onLoadMeetup(meetup.id)"
+            @click.native="onLoadMeetup(meetup.id)"
           >
           <div class="title">
             {{ meetup.title }}
@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     onLoadMeetup (id) {
+      console.log('click')
       return this.$router.push(
         { path: '/meetups/' + id }
       )
