@@ -11,9 +11,9 @@
             height="400px"
           ></v-card-media>
           <v-card-text>
-            <div class="info--text">{{ meetup.date }} - Where it takes place </div>
+            <div class="info--text">{{ meetup.date | date}} - {{ meetup.location }} </div>
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa numquam et nesciunt incidunt inventore perferendis atque, corrupti, provident autem cum velit. Expedita, similique error perspiciatis sed deserunt commodi dolorem velit.
+              {{ meetup.description }}
             </div>
           </v-card-text>
           <v-card-actions>
@@ -35,6 +35,9 @@ export default {
     meetup () {
       return this.$store.getters.loadedMeetup(this.id)
     }
+  },
+  created () {
+    console.log('title', this.meetup)
   }
 }
 </script>
